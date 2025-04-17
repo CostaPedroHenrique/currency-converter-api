@@ -1,0 +1,8 @@
+black==24.8.0
+commitizen==3.13.0
+cz-conventional-changelog
+flake8==6.1.0
+flake8-django==1.4
+isort==5.13.2
+pre-commit==3.5.0
+pyflakes==3.1.0

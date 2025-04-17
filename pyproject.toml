@@ -1,0 +1,20 @@
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.py$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | env
+  | venv
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+known_first_party = ["core", "transactions", "users"]
+skip = ["migrations", "venv"]
