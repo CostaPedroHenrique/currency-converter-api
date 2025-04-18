@@ -5,6 +5,10 @@ from apps.users.managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom user model that uses username and email as unique identifiers.
+    """
+
     username = models.CharField(max_length=255, unique=True)
     email = models.EmailField(unique=True)
 
