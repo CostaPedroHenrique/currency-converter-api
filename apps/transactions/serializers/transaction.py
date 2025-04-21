@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, ValidationError
 
 from apps.transactions.models import Transaction
 from apps.transactions.services import ConversionService
@@ -13,6 +13,14 @@ class TransactionSerializer(ModelSerializer):
         model = Transaction
         fields = "__all__"
         read_only_fields = ["id", "user", "conversion_rate", "target_amount", "date"]
+
+    def validate_target_currency(self, value):
+        source_currency = self.initial_data.get("source_currency")
+        if source_currency == value:
+            raise ValidationError(
+                "Target currency must be different from source currency."
+            )
+        return value
 
     def create(self, validated_data):
         """
