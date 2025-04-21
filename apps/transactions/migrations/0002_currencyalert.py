@@ -55,7 +55,8 @@ class Migration(migrations.Migration):
                     models.DecimalField(
                         decimal_places=2,
                         help_text=(
-                            "Percentual de variação para notificar (ex: 5.00 = 5%)"
+                            "Percentage variation to trigger "
+                            "notification (e.g., 5.00 = 5%)"
                         ),
                         max_digits=5,
                     ),
