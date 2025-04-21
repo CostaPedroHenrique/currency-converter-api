@@ -4,13 +4,12 @@ from celery import shared_task
 
 from apps.notifications.models import Notification
 from apps.transactions.models import CurrencyAlert
-from apps.transactions.services import ConversionService
+from apps.transactions.services import ExchangeRateService
 
 
 @shared_task
 def check_currency_alerts():
-    response = ConversionService.get_conversion_rates()
-    rates = response.get("rates", {})
+    rates = ExchangeRateService.get_rates()
 
     alerts = CurrencyAlert.objects.filter(is_active=True)
 
