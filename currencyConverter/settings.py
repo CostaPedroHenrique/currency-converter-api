@@ -154,6 +154,16 @@ SIMPLE_JWT = {
 }
 
 
+CELERY_BROKER_URL = config("CELERY_BROKER_URL", default="redis://localhost:6379/0")
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+
+
+CRONJOBS = [
+    ("*/1 * * * *", "apps.transactions.crons.test", ">> /tmp/scheduled_job.log 2>&1"),
+]
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
