@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from apps.users.views import GoogleLoginView
 
@@ -28,4 +29,5 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls")),
     path("api/", include(router.urls)),
     path("google-login/", GoogleLoginView.as_view(), name="google_login"),
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
 ]
