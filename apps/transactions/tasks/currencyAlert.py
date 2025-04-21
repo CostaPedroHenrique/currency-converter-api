@@ -50,7 +50,7 @@ def check_currency_alerts():
                 user=alert.user,
                 title=title,
                 message=(
-                    f"A variação do {source_currency} para {target_currency}"
+                    f"A variação do {source_currency} para {target_currency} "
                     f"é agora de {converted_value:.4f}."
                 ),
                 type=type,
