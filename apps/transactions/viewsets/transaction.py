@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.viewsets import GenericViewSet, mixins
 
@@ -17,17 +18,16 @@ class TransactionViewSet(
 
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
-
-    def get_queryset(self):
-        """
-        Returns only transactions of the authenticated user.
-        """
-        return self.queryset.filter(user=self.request.user)
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = {
+        "user": ["exact"],
+        "date": ["exact", "range"],
+    }
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         if instance.user != request.user:
             raise PermissionDenied(
-                "Você não tem permissão para deletar esta transação."
+                "You do not have permission to delete this transaction."
             )
         return super().destroy(request, *args, **kwargs)
