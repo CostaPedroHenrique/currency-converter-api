@@ -161,7 +161,11 @@ CELERY_TASK_SERIALIZER = "json"
 
 
 CRONJOBS = [
-    ("*/1 * * * *", "apps.transactions.crons.test", ">> /tmp/scheduled_job.log 2>&1"),
+    (
+        "0 * * * *",
+        "apps.transactions.crons.check_currency_alerts_cron",
+        ">> /tmp/scheduled_job2.log 2>&1",
+    ),
 ]
 
 

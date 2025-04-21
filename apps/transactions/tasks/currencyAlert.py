@@ -9,7 +9,6 @@ from apps.transactions.services import ConversionService
 
 @shared_task
 def check_currency_alerts():
-    # Pega as taxas atuais usando o ConversionService
     response = ConversionService.get_conversion_rates()
     rates = response.get("rates", {})
 
@@ -55,3 +54,6 @@ def check_currency_alerts():
                 ),
                 type=type,
             )
+
+            alert.base_rate = converted_value
+            alert.save()
