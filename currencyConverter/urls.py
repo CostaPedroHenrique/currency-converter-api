@@ -20,9 +20,28 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from apps.notifications.viewsets import NotificationViewSet
+from apps.transactions.viewsets import CurrencyAlertViewSet, TransactionViewSet
 from apps.users.views import GoogleLoginView
 
 router = DefaultRouter()
+router.register(
+    r"transactions",
+    TransactionViewSet,
+    basename="transaction",
+)
+
+router.register(
+    r"currency-alerts",
+    CurrencyAlertViewSet,
+    basename="currency-alert",
+)
+
+router.register(
+    r"notifications",
+    NotificationViewSet,
+    basename="notification",
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
