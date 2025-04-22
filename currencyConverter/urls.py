@@ -47,6 +47,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("api/", include(router.urls)),
-    path("google-login/", GoogleLoginView.as_view(), name="google_login"),
+    path("api/google-login/", GoogleLoginView.as_view(), name="google_login"),
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
 ]
