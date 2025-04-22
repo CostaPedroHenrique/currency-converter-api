@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from apps.users.managers import UserManager
 
@@ -25,5 +27,24 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
+    def __str__(self):
+        return self.username
+
     class Meta:
         verbose_name = "User"
+
+
+@receiver(post_save, sender=User)
+def create_user_notification(sender, instance, created, **kwargs):
+    """
+    Create a notification for the user when a new user is created.
+    """
+    from apps.notifications.models import Notification
+
+    if created:
+        Notification.objects.create(
+            user=instance,
+            title="Welcome to our platform!",
+            message="Thank you for signing up. We hope you enjoy your experience.",
+            type="INFO",
+        )
