@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "django_crontab",
+    "drf_spectacular",
     # local apps
     "apps.users",
     "apps.transactions",
