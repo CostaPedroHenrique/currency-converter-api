@@ -33,12 +33,16 @@ def check_currency_alerts():
         type = ""
 
         if diff_percent >= alert.variation_threshold:
-            title = f"{source_currency} → {target_currency} subiu {diff_percent:.2f}%"
+            title = (
+                f"{source_currency} → {target_currency} "
+                f"increased by {diff_percent:.2f}%"
+            )
             type = "UP"
             should_notify = True
         elif diff_percent <= -alert.variation_threshold:
             title = (
-                f"{source_currency} → {target_currency} caiu {abs(diff_percent):.2f}%"
+                f"{source_currency} → {target_currency} "
+                f"dropped by {abs(diff_percent):.2f}%"
             )
             type = "DOWN"
             should_notify = True
@@ -48,8 +52,8 @@ def check_currency_alerts():
                 user=alert.user,
                 title=title,
                 message=(
-                    f"A variação do {source_currency} para {target_currency} "
-                    f"é agora de {converted_value:.4f}."
+                    f"The variation from {source_currency} to {target_currency} "
+                    f"is now {converted_value:.4f}."
                 ),
                 type=type,
             )
