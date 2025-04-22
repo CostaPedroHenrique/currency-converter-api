@@ -34,3 +34,4 @@ class CurrencyAlert(models.Model):
         verbose_name_plural = "Currency Alerts"
         ordering = ["-created_at"]
         unique_together = (("user", "source_currency", "target_currency"),)
+        app_label = "transactions"

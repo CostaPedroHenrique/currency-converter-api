@@ -27,3 +27,4 @@ class Notification(models.Model):
         ordering = ["-created_at"]
         verbose_name = "Notification"
         verbose_name_plural = "Notifications"
+        app_label = "notifications"

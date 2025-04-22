@@ -28,3 +28,9 @@ class Transaction(models.Model):
             f"{self.user.username}: "
             f"{self.source_amount} {self.source_currency} → {self.target_currency}"
         )
+
+    class Meta:
+        verbose_name = "Transaction"
+        verbose_name_plural = "Transactions"
+        ordering = ["-date"]
+        app_label = "transactions"
